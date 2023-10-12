@@ -1,0 +1,41 @@
+<div class="container my-5 py-5 overflow-hidden">
+    <h1>Shippin Address</h1>
+    <form [formGroup]="getAddressForm" >
+      <label for="">details</label>
+      <input type="text " class="form-control" formControlName="details" />
+      <p
+        *ngIf="
+          getAddressForm.get('details')?.getError('required') &&
+          getAddressForm.get('details')?.touched
+        "
+        class="text-danger"
+      >
+        Please Enter your details
+      </p>
+      <label for="">city</label>
+      <input type="text " class="form-control" formControlName="city" />
+      <p
+        *ngIf="
+          getAddressForm.get('city')?.getError('required') &&
+          getAddressForm.get('city')?.touched
+        "
+        class="text-danger"
+      >
+        Please Enter your city
+      </p>
+      <label for="">phone</label>
+      <input type="text " class="form-control" formControlName="phone" />
+      <p
+        *ngIf="
+          getAddressForm.get('phone')?.getError('required') &&
+          getAddressForm.get('phone')?.touched
+        "
+        class="text-danger"
+      >
+        Please Enter your phone
+      </p>
+      <button class="my-3 btn bg-main text-light" (click)="checkout(getAddressForm)">online Payment</button>
+      <button class="my-3 btn bg-main text-light" (click)="cashDelivery(getAddressForm)">Cash On Delivery</button>
+    </form>
+  </div>
+  

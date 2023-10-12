@@ -1,0 +1,135 @@
+<div class="container mt-5">
+  <div>
+    <!-- <p class="text-danger border border-danger-subtle">{{errmesage}}</p> -->
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="register(registerForm)">
+    <label>Name: </label>
+    <input
+      type="text"
+      name="fname"
+      formControlName="name"
+      id="n"
+      class="form-control mb-3"
+    />
+    <div
+      *ngIf="
+        registerForm.controls['name'].errors &&
+        registerForm.controls['name'].touched
+      "
+      class="alert alert-danger"
+    >
+      <p *ngIf="registerForm.controls['name'].getError('required')">
+        User Name is required
+      </p>
+      <p *ngIf="registerForm.controls['name'].getError('pattern')">
+        User Name must start with Uppercase
+      </p>
+      <p *ngIf="registerForm.controls['name'].getError('minlength')">
+        Min Length 3
+      </p>
+      <p *ngIf="registerForm.controls['name'].getError('maxlength')">
+        Max Length 20
+      </p>
+    </div>
+    <label>email: </label>
+
+    <input
+      type="email"
+      name="email"
+      id="e"
+      formControlName="email"
+      class="form-control mb-3"
+    />
+    <div
+      *ngIf="
+        registerForm.controls['email'].errors &&
+        registerForm.controls['email'].touched
+      "
+      class="alert alert-danger"
+    >
+      <p *ngIf="registerForm.controls['email'].getError('required')">
+        Email is required
+      </p>
+      <p *ngIf="registerForm.controls['email'].getError('email')">
+        Enter Valid Email
+      </p>
+    </div>
+    <label>phone: </label>
+
+    <input
+      type="phone"
+      name="phone"
+      id="ph"
+      formControlName="phone"
+      class="form-control mb-3"
+    />
+    <div
+      *ngIf="
+        registerForm.controls['phone'].errors &&
+        registerForm.controls['phone'].touched
+      "
+      class="alert alert-danger"
+    >
+      <p *ngIf="registerForm.controls['phone'].getError('required')">
+        phone is required
+      </p>
+      <p *ngIf="registerForm.controls['phone'].getError('pattern')">
+        Enter Valid Egyptian Number
+      </p>
+    </div>
+    <label>password: </label>
+
+    <input
+      type="password"
+      name="password"
+      id="p"
+      formControlName="password"
+      class="form-control mb-3"
+    />
+    <div
+      *ngIf="
+        registerForm.controls['password'].errors &&
+        registerForm.controls['password'].touched
+      "
+      class="alert alert-danger"
+    >
+      <p *ngIf="registerForm.controls['password'].getError('required')">
+        password is required
+      </p>
+      <p *ngIf="registerForm.controls['password'].getError('pattern')">
+        Minimum eight characters, at least one letter, one number and one
+        special character
+      </p>
+    </div>
+    <label>REpassword: </label>
+    <input
+      type="password"
+      name="repassword"
+      formControlName="rePassword"
+      id="re"
+      class="form-control mb-3"
+    />
+    <div
+      *ngIf="
+        registerForm.controls['rePassword'].touched &&
+        !matching(
+          registerForm.controls['rePassword'].value,
+          registerForm.controls['password'].value
+        )
+      "
+      class="alert alert-danger"
+    >
+      <p>Password is not matched</p>
+    </div>
+
+    <ng-template #load>
+      <button type="submit" class="btn bg-main">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      </button>
+    </ng-template>
+    <div class="d-flex justify-content-between align-items-center">
+      <button type="submit" class="btn bg-main">Submit</button>
+      <a routerLink="/login" class="link-primary"> login </a>
+    </div>
+  </form>
+</div>

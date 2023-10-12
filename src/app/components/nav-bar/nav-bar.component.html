@@ -1,0 +1,155 @@
+<nav class="navbar navbar-expand-lg fixed-top bg-main mb-3 rounded">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="home">
+      <img src="./assets/images/freshcart-logo.svg" alt="LOGO" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            *ngIf="loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="brands"
+            >Brands</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="categories"
+            >Categories</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="products"
+            >Products</a
+          >
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-0 mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="true"
+          >
+            <i class="fas fa-user fa-xl"></i>
+          </a>
+          <ul class="dropdown-menu" role="button">
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/forgetpassword"
+                routerLinkActive="bg-light"
+                >Forget Password</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/updatepassword"
+                routerLinkActive="bg-light"
+                >update Password</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/updatedata"
+                routerLinkActive="bg-light"
+                >update Info</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="loggedIn" routerLink="userInfo">
+            Welcome {{ username }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative"
+            *ngIf="loggedIn"
+            routerLink="wishlist"
+          >
+            <i class="lol fa-solid fa-heart"></i>
+            <span class="position-absolute top-0 left-50"
+              >{{ numOfWishedItems }}
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative"
+            *ngIf="loggedIn"
+            routerLink="cart"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="position-absolute top-0 left-50"
+              >{{ numOfItems }}
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="!loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="login"
+            >login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="!loggedIn"
+            routerLinkActive="bg-light"
+            routerLink="register"
+            >register</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="loggedIn"
+            routerLinkActive="bg-light"
+            (click)="logout()"
+            >logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

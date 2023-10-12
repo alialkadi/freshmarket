@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <button
+    (click)="removeAllItems()"
+    class="btn btn-outline-danger ms-auto d-block mt-5 mb-3"
+  >
+    Clear cart
+  </button>
+  <div class="container">
+    <div class="row">
+      <div class="row mx-auto" *ngIf="emptyMessage; else empty">
+        <div
+          *ngFor="let product of cartData"
+          class="row my-3 shadow p-2 rounded-2 mx-auto"
+        >
+          <div class="col-md-1">
+            <img class="w-100" [src]="product.product.imageCover" alt="" />
+          </div>
+          <div class="col-md-11">
+            <div class="d-flex justify-content-between">
+              <h3>{{ product.product.title }}</h3>
+              <button
+                (click)="removeFromCart(product.product._id)"
+                class="btn text-danger"
+              >
+                <i class="fas fa-trash"></i> Remove
+              </button>
+            </div>
+            <div
+              class="d-flex justify-content-between align-items-center small"
+            >
+              <h5>{{ product.product.category.name }}</h5>
+              <div class="small">
+                <button
+                  (click)="
+                    updateCountItem(product.product._id, product.count - 1)
+                  "
+                  class="btn bg-main text-white mx-1"
+                >
+                  -
+                </button>
+                <span class="numberss">{{ product.count }}</span>
+                <button
+                  (click)="
+                    updateCountItem(product.product._id, product.count + 1)
+                  "
+                  class="btn bg-main text-white mx-1"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <p class="d-flex justify-content-between">
+              <span>{{ product.price | currency : "EGP" }}</span>
+              <span
+                ><i class="fas fa-star rating-color"></i
+                >{{ product.product.ratingsAverage }}</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <span class="d-block ms-auto h5 my-3"
+      >Total cart price :
+      <span class="fw-bolder">{{ totalPrice | currency : "EGP" }}</span></span
+    >
+
+    <button
+      *ngIf="cartData.length !== 0"
+      [routerLink]="['/checkout', cartId]"
+      class="btn btn-outline-success d-block m-auto my-3"
+    >
+      Checkout
+    </button>
+  </div>
+
+  <ng-template #empty class="position-relative">
+    <div>
+      <div
+        class="position-absolute top-50 start-50 translate-middle text-danger fs-1"
+      >
+        <h2 class="alert alert-danger text-center">No products in your cart</h2>
+      </div>
+    </div>
+  </ng-template>
+</div>

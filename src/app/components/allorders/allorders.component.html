@@ -1,0 +1,52 @@
+<div class="container m-5 p-3">
+  <div
+    *ngFor="let product of cartData; let i = index"
+    [attr.data-index]="i"
+    class="row my-3 shadow p-2 rounded-2"
+  >
+    Cart No:- {{ i + 1 }}
+    <div class="row">
+      <div class="col-5 p-2 m-1 bg-main rounded-2 text-light">
+        <div class="col-md-12">
+          Total Price :- &nbsp;{{ product.totalOrderPrice }}
+        </div>
+        <div class="col-md-12">
+          Payment Method:- &nbsp;{{ product.paymentMethodType }}
+        </div>
+        <div class="col-md-12">Crated At:- &nbsp;{{ product.createdAt }}</div>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-5 p-2 m-1 bg-main rounded-2 text-light">
+        <div class="col-md-12">
+          Details :- &nbsp;{{ product.shippingAddress.details }}
+        </div>
+        <div class="col-md-12">
+          Payment Method:- &nbsp;{{ product.shippingAddress.city }}
+        </div>
+        <div class="col-md-12">
+          Crated At:- &nbsp;{{ product.shippingAddress.phone }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md" *ngFor="let item of product.cartItems; let i = index">
+      <div class="card shadow rounded-2 m-1 p-3" style="width: 18rem">
+        <img
+          role="button"
+          [src]="item.product.imageCover"
+          [routerLink]="['/productDetails', item.product._id]"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title" [title]="item.product.title">
+            {{ item.product.title }}...
+          </h5>
+          <h5 class="card-title">Item Count: &nbsp; {{ item.count }}</h5>
+          <p class="card-text">
+            {{ item.price | currency : "EGP" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

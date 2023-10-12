@@ -1,0 +1,169 @@
+<div class="container mt-5">
+  <h2>All Products</h2>
+  <div class="row justify-content-center">
+    <div
+      class="col-md-3 h-100"
+      *ngFor="
+        let product of products
+          | paginate
+            : {
+                id: 'product',
+                itemsPerPage: pageSize,
+                currentPage: currentpage,
+                totalItems: total
+              }
+      "
+      style="width: 18rem"
+    >
+      <div class="card product m-1 p-3">
+        <div>
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let img of product.images">
+              <ng-template carouselSlide [id]="img">
+                <img
+                  role="button"
+                  [src]="img"
+                  [routerLink]="['/productDetails', product._id]"
+                  class="card-img-top w-100"
+                  alt="..."
+                />
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p
+            class="card-text titl text-success"
+            role="button"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="
+              '#' + 'exampleModalLabel' + product._id.trim()
+            "
+          >
+            {{ product.description }}
+          </p>
+          <div class="d-flex align-items-center justify-content-between small">
+            <div class="">{{ product.price | currency : "EGP" }}</div>
+            <div class="">
+              <i
+                [class.rating-color]="product.ratingsAverage >= item"
+                *ngFor="let item of [1, 2, 3, 4, 5]"
+                class="fa-solid fa-star rating-color"
+              ></i
+              >{{ product.ratingsAverage }}
+            </div>
+          </div>
+          <div class="row text-center mt-1">
+            <div class="col-md-6 col-lg-6 col-6 text-center">
+              <button
+                class="btn bg-main text-white w-100"
+                (click)="addProduct(product._id, btnLoad)"
+                #btnLoad
+              >
+                +<i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+            <div class="col-md-6 col-lg-6 col-6 text-center">
+              <button
+                class="btn bg-transparent w-100"
+                #wisheded
+                (click)="addWishItem(product._id, wisheded)"
+              >
+                <i class="lol fa-solid fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        [id]="'exampleModalLabel' + product._id.trim()"
+        tabindex="-1"
+        [attr.aria-labelledby]="'exampleModalLabel' + product._id.trim()"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1
+                class="modal-title fs-5"
+                [id]="'exampleModalLabel' + product._id.trim()"
+              >
+                Modal title
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <img [src]="product.imageCover" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text titl">{{ product.description }}</p>
+                <div class="row">
+                  <div class="col-md-8">
+                    {{ product.price | currency : "EGP" }}
+                  </div>
+                  <div class="col-md-4">
+                    <i class="fa-solid fa-star rating-color"></i
+                    >{{ product.ratingsAverage }}
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col-md-6 col-lg-6 col-6 text-center">
+                    <button
+                      class="btn bg-main text-white w-100"
+                      (click)="addProduct(product._id, btnLoads)"
+                      #btnLoads
+                    >
+                      +<i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-6 text-center">
+                    <button
+                      class="btn bg-transparent w-100"
+                      #wished
+                      (click)="addWishItem(product._id, wished)"
+                    >
+                      <i class="lol fa-solid fa-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls
+      class="my-pagination d-flex justify-content-center"
+      id="product"
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    >
+    </pagination-controls>
+  </div>
+</div>

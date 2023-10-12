@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <div>
+    <p class="text-danger border border-danger-subtle">{{ errmesage }}</p>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+    <label>email: </label>
+
+    <input
+      type="email"
+      name="email"
+      id="e"
+      formControlName="email"
+      class="form-control mb-3"
+    />
+    <p
+      *ngIf="
+        loginForm.get('email')?.getError('required') &&
+        loginForm.get('email')?.touched
+      "
+      class="text-danger"
+    >
+      Please Enter Email
+    </p>
+    <p
+      *ngIf="
+        loginForm.get('email')?.getError('email') &&
+        loginForm.get('email')?.touched
+      "
+      class="text-danger"
+    >
+      Please Enter valid Email
+    </p>
+    <label>password: </label>
+
+    <input
+      type="password"
+      name="password"
+      id="p"
+      formControlName="password"
+      class="form-control mb-3"
+    />
+    <p
+      *ngIf="
+        loginForm.get('password')?.getError('required') &&
+        loginForm.get('password')?.touched
+      "
+      class="text-danger"
+    >
+      Please Enter your password
+    </p>
+    <p
+      *ngIf="
+        loginForm.get('password')?.getError('maxlength') &&
+        loginForm.get('password')?.touched
+      "
+      class="text-danger"
+    >
+      Please Enter less than 16 chars
+    </p>
+    <p
+      *ngIf="
+        loginForm.get('password')?.getError('minlength') &&
+        loginForm.get('password')?.touched
+      "
+      class="text-danger"
+    >
+      Please Enter more than 6 chars
+    </p>
+
+    <div class="d-flex justify-content-between align-items-center m-1">
+      <button
+        *ngIf="!isLoading; else load"
+        type="submit"
+        class="bb btn bg-main"
+      >
+        Submit
+      </button>
+      <a class="btn bb bg-main" routerLink="/register"> register </a>
+      <a routerLink="/forgetpassword" *ngIf="forgot" class="bb link-primary">
+        Forget Password
+      </a>
+    </div>
+    <ng-template #load>
+      <button type="submit" class="btn bg-main">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      </button>
+    </ng-template>
+  </form>
+</div>

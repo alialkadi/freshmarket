@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <h2>Shop Popular categories</h2>
+  <owl-carousel-o [options]="CategoryCustomOptions">
+    <ng-container *ngFor="let category of categories">
+      <ng-template carouselSlide [id]="category._id">
+        <img height="300" [src]="category.image" [alt]="category.name" />
+        <h4 class="h6">{{ category.name }}</h4>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</div>

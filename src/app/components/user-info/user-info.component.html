@@ -1,0 +1,149 @@
+<div class="container mt-5">
+  <section class="w-75 mx-auto rounded p-3 shadow" *ngIf="step1">
+    <h2 class="text-success text-center">Enter Your Details</h2>
+    <form [formGroup]="userInfoForm" (ngSubmit)="addAddress(userInfoForm)">
+      <label class="form-label" for="">Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        name=""
+        id="name"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          userInfoForm.controls['name'].errors &&
+          userInfoForm.controls['name'].touched
+        "
+        class="alert alert-danger"
+      >
+        <p *ngIf="userInfoForm.controls['name'].getError('required')">
+          User Name is required
+        </p>
+        <p *ngIf="userInfoForm.controls['name'].getError('pattern')">
+          User Name must start with Uppercase
+        </p>
+        <p *ngIf="userInfoForm.controls['name'].getError('minlength')">
+          Min Length 3
+        </p>
+        <p *ngIf="userInfoForm.controls['name'].getError('maxlength')">
+          Max Length 20
+        </p>
+      </div>
+      <label class="form-label" for="">details</label>
+      <input
+        formControlName="details"
+        type="text"
+        name=""
+        id="details"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          userInfoForm.controls['details'].errors &&
+          userInfoForm.controls['details'].touched
+        "
+        class="alert alert-danger"
+      >
+        <p *ngIf="userInfoForm.controls['details'].getError('required')">
+          User details is required
+        </p>
+
+        <p *ngIf="userInfoForm.controls['details'].getError('minlength')">
+          Min Length 3
+        </p>
+        <p *ngIf="userInfoForm.controls['details'].getError('maxlength')">
+          Max Length 20
+        </p>
+      </div>
+      <label class="form-label" for="">city</label>
+      <input
+        formControlName="city"
+        type="text"
+        name=""
+        id="city"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          userInfoForm.controls['city'].errors &&
+          userInfoForm.controls['city'].touched
+        "
+        class="alert alert-danger"
+      >
+        <p *ngIf="userInfoForm.controls['city'].getError('required')">
+          User city is required
+        </p>
+
+        <p *ngIf="userInfoForm.controls['city'].getError('minlength')">
+          Min Length 3
+        </p>
+        <p *ngIf="userInfoForm.controls['city'].getError('maxlength')">
+          Max Length 20
+        </p>
+      </div>
+      <label class="form-label" for="">Phone</label>
+      <input
+        formControlName="phone"
+        type="text"
+        name=""
+        id="phone"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          userInfoForm.controls['phone'].errors &&
+          userInfoForm.controls['phone'].touched
+        "
+        class="alert alert-danger"
+      >
+        <p *ngIf="userInfoForm.controls['phone'].getError('required')">
+          phone is required
+        </p>
+        <p *ngIf="userInfoForm.controls['phone'].getError('pattern')">
+          Enter Valid Egyptian Number
+        </p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <button class="btn bg-main">Enter Data</button>
+        <button class="btn bg-main" (click)="get()">Get Info</button>
+      </div>
+    </form>
+  </section>
+  <section
+    class="w-75 mx-auto rounded p-3 shadow justify-content-center align-items-center"
+    *ngIf="step2"
+    [ngClass]="step2 ? 'd-flex' : 'none'"
+  >
+    <div *ngIf="userInfo.length !== 0; else empty">
+      <div
+        *ngFor="let item of userInfo"
+        class="d-flex justify-content-around align-items-center mt-3"
+      >
+        <div class="">
+          <h4 class="bg-main rounded">Name:&nbsp;{{ item.name }}</h4>
+          <h4 class="bg-main rounded">phone:&nbsp;{{ item.phone }}</h4>
+          <h4 class="bg-main rounded">city:&nbsp;{{ item.city }}</h4>
+          <h4 class="bg-main rounded">details:&nbsp;{{ item.details }}</h4>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button class="btn text-danger" (click)="removeInfo(item._id)">
+            <i class="fas fa-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ng-template #empty class="">
+    <div>
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="alert alert-danger text-center">
+          No Information Found
+          <div>
+            <a class="link-primary" routerLink="/userInfo">Enter Information</a>
+          </div>
+        </h2>
+      </div>
+    </div>
+  </ng-template>
+</div>

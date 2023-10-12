@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="row" *ngIf="wishListData.length !== 0; else empty">
+      <div
+        *ngFor="let product of wishListData"
+        class="row my-3 shadow p-2 rounded-2"
+      >
+        <div class="col-md-1">
+          <img class="w-100" [src]="product?.imageCover" alt="" />
+        </div>
+        <div class="col-md-11">
+          <div class="d-flex justify-content-between">
+            <h3>{{ product?.title }}</h3>
+            <button
+              (click)="deleteFromWish(product?._id)"
+              class="btn text-danger"
+            >
+              <i class="fas fa-trash"></i>Remove
+            </button>
+          </div>
+          <div class="d-flex justify-content-between">
+            <h5>{{ product?.name }}</h5>
+          </div>
+          <p class="d-flex justify-content-between">
+            <span>{{ product?.price | currency : "EGP" }}</span>
+            <span
+              ><i class="fas fa-star rating-color"></i
+              >{{ product?.ratingsAverage }}</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty class="position-relative">
+  <div>
+    <div
+      class="position-absolute top-50 start-50 translate-middle text-danger fs-1"
+    >
+      <h2 class="alert alert-danger text-center">
+        No products in your WishList
+      </h2>
+    </div>
+  </div>
+</ng-template>

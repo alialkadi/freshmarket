@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let brand of allBrands">
+      <div
+        class="card m-1 p-3"
+        data-bs-toggle="modal"
+        [attr.data-bs-target]="'#' + 'test' + brand._id.toString().trim()"
+      >
+        <div class="card-img">
+          <img alt="" class="img-fluid" [src]="brand.image" />
+        </div>
+        <div class="card-body">
+          <p class="text-center">{{ brand.name }}</p>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        [id]="'test' + brand._id.toString().trim()"
+        tabindex="-1"
+        [attr.aria-labelledby]="'test' + brand._id.toString().trim() + 'Label'"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1
+                class="modal-title fs-5"
+                [id]="'test' + brand._id.toString().trim() + 'Label'"
+              >
+                {{ brand.name }}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-6">{{ brand.name }}</div>
+              <div class="col-md-6">
+                <img [src]="brand.image" alt="" class="w-100" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

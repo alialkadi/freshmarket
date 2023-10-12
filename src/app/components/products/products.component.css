@@ -1,0 +1,33 @@
+p.titl {
+  white-space: nowrap;
+  width: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+h5 {
+  white-space: nowrap;
+  width: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn {
+  transition: transform 0.5s;
+  padding: 13px;
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+}
+.btn:hover {
+  color: var(--main-color);
+  transform: scale(1.1);
+}
+.lol:focus {
+  border: 1px solid var(--main-color);
+}
+
+@media screen and (max-width: 442px) {
+  .btn {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
